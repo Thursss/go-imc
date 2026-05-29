@@ -1,0 +1,26 @@
+syntax = "v1"
+
+info (
+	title:   "type title here"
+	desc:    "type desc here"
+	author:  "type author here"
+	email:   "type email here"
+	version: "type version here"
+)
+
+type (
+	UserRes {
+		Id string `json:"id"`
+	}
+	UserResq {
+		Id    string `json:"id"`
+		Name  string `json:"name"`
+		Phone string `json:"phone"`
+	}
+)
+
+service User {
+	@handler user
+	get /user (UserRes) returns (UserResq)
+}
+

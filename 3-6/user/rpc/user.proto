@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package user; // 默认包名
+
+// protoc --go-grpc_out=require_unimplemented_servers=false:. --go_out=. ./user.proto
+option go_package = "./user"; // 包名
+
+service User {
+  rpc GetUser(GetUserRes) returns (GetUserResp);
+
+  rpc Ping(GetUserRes) returns (GetUserResp);
+}
+
+message GetUserRes {
+  string id = 1;
+}
+message GetUserResp {
+  string id = 1;
+  string name = 2;
+  string phone = 3;
+}
