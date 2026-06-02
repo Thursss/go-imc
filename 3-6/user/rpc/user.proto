@@ -3,13 +3,8 @@ syntax = "proto3";
 package user; // 默认包名
 
 // protoc --go-grpc_out=require_unimplemented_servers=false:. --go_out=. ./user.proto
+// goctl rpc protoc user.proto --go_out=. --go-grpc_out=. --zrpc_out=.
 option go_package = "./user"; // 包名
-
-service User {
-  rpc GetUser(GetUserRes) returns (GetUserResp);
-
-  rpc Ping(GetUserRes) returns (GetUserResp);
-}
 
 message GetUserRes {
   string id = 1;
@@ -19,3 +14,22 @@ message GetUserResp {
   string name = 2;
   string phone = 3;
 }
+
+message CreateUserReq {
+  int64 id = 1;
+  string name = 2;
+  string phone = 3;
+}
+
+message CreateUserResp {
+  int64 id = 1;
+}
+
+service User {
+  rpc GetUser(GetUserRes) returns (GetUserResp);
+
+  rpc CreateUser(CreateUserReq) returns (CreateUserResp);
+
+  rpc Ping(GetUserRes) returns (GetUserResp);
+}
+
